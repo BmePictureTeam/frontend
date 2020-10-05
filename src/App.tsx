@@ -55,7 +55,7 @@ function App() {
 }
 
 const InstrumentView  = (props: {instrument: Instrument } ) => {
-return (<div><div className="name"> {props.instrument.name}</div><img src={props.instrument.imageUrl
+return (<div><div className="name"> {props.instrument.name}</div><img className="kep" src={props.instrument.imageUrl
 } /> </div>);
 }
 
