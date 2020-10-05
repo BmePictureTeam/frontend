@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #252419;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -36,7 +36,7 @@
 
 .kep {
   margin: 10px;
-  width: 90%;
+  width: 80%;
   height: auto;
 }
 
