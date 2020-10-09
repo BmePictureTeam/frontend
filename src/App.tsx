@@ -23,7 +23,7 @@ function App() {
   }, []);
 
   const getInstruments = async () => {
-    const result = await fetch("https://temalab.cicum.icu/instruments", {
+    const result = await fetch(`${process.env.REACT_APP_API_URL}/instruments`, {
       method: "GET",
     });
 
