@@ -38,13 +38,13 @@ jobs:
           context: "."
   deploy:
     runs-on: ubuntu-latest
-    container: bitnami/kubectl:latest
     needs: build
     steps:
       - name: Checkout Project
         uses: actions/checkout@v1
       - name: Deploy
+        uses: steebchen/kubectl@master
         env:
-          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
-        run: echo $KUBE_CONFIG > /.kube/config && kubectl apply -f ./deploy/app.yaml
-
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG }}
+        with:
+          args: '"apply -f ./deploy/app.yaml"'
