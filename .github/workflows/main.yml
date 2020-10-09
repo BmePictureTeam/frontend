@@ -43,9 +43,8 @@ jobs:
     steps:
       - name: Checkout Project
         uses: actions/checkout@v1
-      - name: Load Kube Config
+      - name: Deploy
         env:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
-        run: mkdir -p /.kube && echo $KUBE_CONFIG > /.kube/config
-      - name: Deploy
-        run: kubectl apply -f ./deploy/app.yaml
+        run: echo $KUBE_CONFIG > /.kube/config && kubectl apply -f ./deploy/app.yaml
+
