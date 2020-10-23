@@ -1,8 +1,16 @@
-import React, { useEffect, useState, Component} from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {
+  useEffect,
+  useState,
+  Component,
+  ChangeEvent,
+  FormEvent,
+} from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
-import ReactDOM from 'react-dom';
+import ReactDOM from "react-dom";
+import { Backend } from "./service/backend";
+import { Login } from "./Login";
 
 interface Instrument {
   name: string;
@@ -11,73 +19,81 @@ interface Instrument {
   imageUrl: string;
 }
 
-
-
-
-
-
-
-
 interface InstrumentsResponse {
   instruments: Instrument[];
 }
-
-
-function buttonPressed() {
-  alert("Gomb megnyomva!");
-}
-
 
 function App() {
   const [instrumentsResponse, updateInstruments] = useState<
     InstrumentsResponse | undefined
   >(undefined);
 
-  useEffect(() => {
-    getInstruments();
-  }, []);
+  const [email, updateEmail] = useState("");
 
-  const getInstruments = async () => {
-    const result = await fetch(`${process.env.REACT_APP_API_URL}/instruments`, {
-      method: "GET",
-    });
-
-    updateInstruments(await result.json());
+  const onEmailChange = (event: any) => {
+    updateEmail(event.target.value);
   };
 
-  // let content: any;
-  // if (typeof instrumentsResponse === "undefined") {
-  //   content = "";
-  // } else {
-  //   const instrumentDivs: any[] = [];
-  //   for (const instrument of instrumentsResponse.instruments) {
-  //     instrumentDivs.push(<div>{instrument.name} </div>)
-  //   }
-  //   content = instrumentDivs;
+  const [password, updatePassword] = useState("");
+
+  // const router = useRouter();
+  // const route = useRoute();
+
+  // if (route.path == "/login" && Backend.isLoggedIn()) {
+  //   router.push("/dashboard");
   // }
 
- 
-  
+  const onPasswordChange = (event: any) => {
+    console.log(event.target.value);
+    updatePassword(event.target.value);
+  };
+
+  const onSubmitPressed = async (event: FormEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (email.length == 0 || password.length == 0) {
+      return;
+    }
+
+    try {
+      await new Backend().login(email, password);
+
+      // router.push("/dashboard");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="App">
-       <div className="Login">
-
-       <form id="usrform">
-       <header className="Szoveg">Felhasználonév:</header>
-         <input className="SzovegBevitel" type="text" name="usrname"/>
-         <header className="Szoveg">Jelszó:</header>
-         <input className="SzovegBevitel" type="password" name="password"/>
-         <br/>
-         <button onClick={buttonPressed} className="BejelentkezesGomb">Bejelentkezés</button>
-         </form>
-
-
+      <div className="Login">
+        <form id="usrform" onSubmit={onSubmitPressed}>
+          <header className="Szoveg">Felhasználonév:</header>
+          <input
+            onChange={onEmailChange}
+            value={email}
+            className="SzovegBevitel"
+            type="text"
+            name="usrname"
+          />
+          <header className="Szoveg">Jelszó:</header>
+          <input
+            onChange={onPasswordChange}
+            value={password}
+            className="SzovegBevitel"
+            type="password"
+            name="password"
+          />
+          <br />
+          <Login />
+          <button type="submit" className="BejelentkezesGomb">
+            Bejelentkezés
+          </button>
+        </form>
       </div>
-      
     </div>
   );
 }
-
 
 export default App;
