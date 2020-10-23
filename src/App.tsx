@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import React, { useEffect, useState, Component} from 'react';
+import logo from './logo.svg';
+import './App.css';
+
+import ReactDOM from 'react-dom';
 
 interface Instrument {
   name: string;
@@ -9,9 +11,22 @@ interface Instrument {
   imageUrl: string;
 }
 
+
+
+
+
+
+
+
 interface InstrumentsResponse {
   instruments: Instrument[];
 }
+
+
+function buttonPressed() {
+  alert("Gomb megnyomva!");
+}
+
 
 function App() {
   const [instrumentsResponse, updateInstruments] = useState<
@@ -41,26 +56,28 @@ function App() {
   //   content = instrumentDivs;
   // }
 
+ 
+  
+
   return (
     <div className="App">
-      <header className="App-header">
-        {typeof instrumentsResponse === "undefined"
-          ? ""
-          : instrumentsResponse!.instruments.map(instrument => (
-              <InstrumentView instrument={instrument} />
-            ))}
-      </header>
+       <div className="Login">
+
+       <form id="usrform">
+       <header className="Szoveg">Felhasználonév:</header>
+         <input className="SzovegBevitel" type="text" name="usrname"/>
+         <header className="Szoveg">Jelszó:</header>
+         <input className="SzovegBevitel" type="password" name="password"/>
+         <br/>
+         <button onClick={buttonPressed} className="BejelentkezesGomb">Bejelentkezés</button>
+         </form>
+
+
+      </div>
+      
     </div>
   );
 }
 
-const InstrumentView = (props: { instrument: Instrument }) => {
-  return (
-    <div>
-      <div className="name"> {props.instrument.name}</div>
-      <img className="kep" src={props.instrument.imageUrl} />
-    </div>
-  );
-};
 
 export default App;
