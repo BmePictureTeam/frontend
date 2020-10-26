@@ -24,6 +24,24 @@ export class Backend {
     Backend.token = loginRes.token;
   }
 
+
+  public async registration(email: string, password: string) {
+
+  //  const response = await fetch(`${Backend.backendUrl}/auth/login`, {
+  //    method: "POST",
+  //    headers: {
+  //      "Content-Type": "application/json",
+  //    },
+  //    body: JSON.stringify({ email, password }),
+  //  });
+
+ //   const loginRes = (await response.json()) as LoginResponse;
+
+ //   Backend.token = loginRes.token;
+
+  }
+
+
   public async createCategory(name: string): Promise<CreateCategoryResponse> {
     this.checkToken();
 
