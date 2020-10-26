@@ -13,50 +13,31 @@ import { Backend } from "./service/backend";
 import { Login } from "./Login";
 import { Register } from "./Register";
 import { Dashboard } from "./Dashboard";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-
-
-
-
+import { BrowserRouter as Router, Switch, Route, Link, useLocation, useHistory } from "react-router-dom";
+import { Root } from "./Root";
 
 function App() {
-  
+ 
+
 
   return (
     <div className="App">
-
-
-
-
-
-
-        <Router>
-   
-
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-            <Switch>
+      <Router>
+        <Switch>
           <Route path="/dashboard">
             <Dashboard />
           </Route>
           <Route path="/register">
-          <Register/>
+            <Register />
           </Route>
-          <Route path="/">
+          <Route path="/login">
             <Login />
           </Route>
+          <Route path="/">
+            <Root/>
+          </Route>
         </Switch>
-   
-    </Router>
- 
-
-
-      
+      </Router>
     </div>
   );
 }
