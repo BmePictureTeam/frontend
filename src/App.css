@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  text-align: left;
 }
 
 .App-logo {
@@ -13,48 +13,196 @@
   }
 }
 
-.Login{
-  
-position: absolute;
-width: 736px;
-height: 465px;
-left: calc(50% - 736px/2);
-top: calc(50% - 465px/2 + 0.5px);
-background: #C4C4C4;
-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-align-items: center;
+.Login {
+  display: block;
+  position: absolute;
+  width: 736px;
+  height: 465px;
+  left: calc(50% - 736px / 2);
+  top: calc(50% - 465px / 2 + 0.5px);
+  background: #c4c4c4;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  float: none;
+  text-align: center;
 }
 
-.SzovegBevitel{
+#regLink {
+  color: black;
+  text-decoration: none;
+}
+#regLink:hover {
+  color: rgb(79, 79, 79);
+  text-decoration: none;
+}
+
+.SzovegBevitel {
   background: white;
   margin-top: 15px;
-  align-items: center;
+  align-content: center;
   justify-content: center;
   font-size: 30px;
   color: black;
+  float: none;
 }
 
-.BejelentkezesGomb{
+.usrform {
+  align-content: center;
+  float: none;
+}
+
+.Szoveg {
+  background: none;
+  margin-top: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: black;
+}
+
+.BejelentkezesGomb {
+  float: none;
   background: rgb(95, 95, 95);
   margin-top: 45px;
-  align-items: center;
-  justify-content: center;
+
+  text-align: center;
+
   font-size: 30px;
   color: white;
   border-radius: 7px;
   border: transparent;
   padding: 14px;
-}
-
-.Szoveg {
-background: none;
-margin-top: 56px;
-  display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+#bejelentkezveText {
+  padding-top: 15px;
+  margin-left: 20px;
+  display: inline;
+  display: block;
+  color: white;
+  font-size: 24px;
+  float: left;
+}
+
+#kijelentkezesText {
+  text-decoration: none;
+  padding-top: 15px;
+  margin-right: 20px;
+
+  float: right;
+
+  color: white;
+  font-size: 24px;
+}
+#kijelentkezesText:hover {
+  color: rgb(161, 161, 161);
+}
+
+#KategoriaText {
+  margin-top: 90px;
+
+  font-size: 40px;
+  font-weight: bold;
+  margin-left: 40px;
+}
+#tabla {
+  margin-top: 30px;
+  width: 100%;
+}
+
+#kijelentkezesText:hover {
+  color: #9c9c9c;
+}
+
+.Fejlec {
+  min-height: 60px;
+  display: block;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+.KeresesForm {
+  float: left;
+}
+table,
+tr,
+th,
+td {
+  border: none;
+}
+th,
+td {
+  padding: 10px;
+  padding-left: 30px;
+}
+th {
+  background-color: #ad98ff;
+  color: white;
+}
+.paros {
+  background-color: #f4f7ff;
+}
+.paratlan {
+  background-color: linear-gradient(0deg, #e3ebff, #d3dffd), #e3ebff;
+}
+
+.KeresesBevitel {
+  border: none;
+  margin-left: 40px;
+  padding: 12px;
+  background: #f2f2f2;
+  margin-top: 15px;
+  font-size: 30px;
+  min-width: 400px;
   color: black;
+}
+
+#KeresesGomb {
+  background: rgb(165, 165, 165);
+  margin-top: 25px;
+  margin-left: 25px;
+  min-width: 200px;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: black;
+  border-radius: 7px;
+  border: transparent;
+  padding: 14px;
+}
+#KeresesGomb:hover {
+  background-color: #666666;
+}
+
+#UjKategoriaGomb {
+  float: right;
+  background: #008a0e;
+  margin-top: 25px;
+  margin-right: 25px;
+  min-width: 300px;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: white;
+  border-radius: 7px;
+  border: transparent;
+  padding: 14px;
+}
+#UjKategoriaGomb:hover {
+  background-color: #225024;
+}
+
+.Register {
+  position: absolute;
+  width: 736px;
+  height: 465px;
+  left: calc(50% - 736px / 2);
+  top: calc(50% - 465px / 2 + 0.5px);
+  background: #c4c4c4;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  text-align: center;
 }
 
 .App-link {
