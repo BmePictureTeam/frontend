@@ -15,6 +15,7 @@ import { Register } from "./Register";
 import { Dashboard } from "./Dashboard";
 import { BrowserRouter as Router, Switch, Route, Link, useLocation, useHistory } from "react-router-dom";
 import { Root } from "./Root";
+import { CategoryCreate } from "./CategoryCreate";
 
 function App() {
  
@@ -32,6 +33,9 @@ function App() {
           </Route>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/categorycreate">
+            <CategoryCreate />
           </Route>
           <Route path="/">
             <Root/>
