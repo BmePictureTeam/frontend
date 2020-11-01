@@ -38,6 +38,7 @@ export function Login() {
 
     try {
       await new Backend().login(email, password);
+      localStorage.setItem("email", email);
       history.push("/dashboard");
     } catch (error) {
       alert("Helytelen felhasználónév vagy jelszó");

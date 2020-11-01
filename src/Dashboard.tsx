@@ -15,14 +15,15 @@ import { Register } from "./Register";
 
 function kijelentkezesClick() {
   Backend.setToken(null);
-  localStorage.removeItem("token")
+  localStorage.removeItem("token");
+  localStorage.removeItem("email");
   window.location.reload(false);
 }
 
 
 
 export function Dashboard() {
-
+  var email: string | null = localStorage.getItem("email");
   const history = useHistory();
   const localion = useLocation();
   if (!Backend.isLoggedIn()) {
@@ -48,7 +49,7 @@ export function Dashboard() {
   return (
     <div className="Dashboard">
       <div className="Fejlec">
-        <div id="bejelentkezveText">Bejelentkezve: Ócsai Dávid</div>
+        <div id="bejelentkezveText">Bejelentkezve: {email}</div>
 
       <button id="kijelentkezesText" onClick={kijelentkezesClick}>
         Kijelentkezés

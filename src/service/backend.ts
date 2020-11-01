@@ -58,7 +58,7 @@ export class Backend {
 
 
 
-  public async getCategory(): Promise<GetCategoryResponse> {
+  public async getCategories(): Promise<GetCategoriesResponse> {
     this.checkToken();
 
     const response = await fetch(`${Backend.backendUrl}/categories`, {
@@ -104,8 +104,16 @@ export interface CreateCategoryResponse {
   id: string;
 }
 
-export interface GetCategoryResponse {
+
+
+interface Category {
   id: string;
+  image_count: number;
+  name: string;
+}
+
+interface GetCategoriesResponse {
+  categories: Category[]
 }
 
 export class BackendError extends Error {
