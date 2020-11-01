@@ -13,22 +13,48 @@ import {
 import ReactDOM from "react-dom";
 import { Register } from "./Register";
 
+function kijelentkezesClick() {
+  Backend.setToken(null);
+  localStorage.removeItem("token")
+  window.location.reload(false);
+}
+
+
+
 export function Dashboard() {
+
   const history = useHistory();
   const localion = useLocation();
   if (!Backend.isLoggedIn()) {
     history.push("/login");
   }
 
+
+
+  const ujKategoriaClick = async () => {
+    if (Backend.isLoggedIn()) {
+      history.push("/categorycreate");
+    }else{
+      history.push("/login");
+    }
+    window.location.reload(false);
+
+    return;
+  }
+
+  
+  
+
   return (
     <div className="Dashboard">
       <div className="Fejlec">
         <div id="bejelentkezveText">Bejelentkezve: Ócsai Dávid</div>
-        <div>
-          <Link id="kijelentkezesText" to="/">
-            Kijelentkezés
-          </Link>
-        </div>
+
+      <button id="kijelentkezesText" onClick={kijelentkezesClick}>
+        Kijelentkezés
+      </button>
+            
+      
       </div>
       <form className="KeresesForm">
         <input className="KeresesBevitel" type="text" name="usrname" />
@@ -36,7 +62,7 @@ export function Dashboard() {
           Keresés
         </button>
       </form>
-      <button type="submit" id="UjKategoriaGomb">
+      <button type="submit" id="UjKategoriaGomb" onClick={() => ujKategoriaClick()}>
         Új Kategória
       </button>
       <br />

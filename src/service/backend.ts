@@ -2,7 +2,7 @@ export class Backend {
   private static token: string | null = localStorage.getItem("token");
   private static backendUrl = process.env.REACT_APP_API_URL as string;
 
-  public static setToken(token: string) {
+  public static setToken(token: string | null) {
     Backend.token = token;
   }
 
@@ -56,6 +56,33 @@ export class Backend {
     return await response.json();
   }
 
+
+
+  public async getCategory(): Promise<GetCategoryResponse> {
+    this.checkToken();
+
+    const response = await fetch(`${Backend.backendUrl}/categories`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${Backend.token}`,
+      },
+      body: JSON.stringify({}),
+    });
+
+    this.checkResponseStatus(response);
+
+    return await response.json();
+  }
+
+
+
+
+
+
+
+
+
   private checkResponseStatus(response: Response) {
     if (response.status >= 400) {
       throw new BackendError(response);
@@ -74,6 +101,10 @@ export interface LoginResponse {
 }
 
 export interface CreateCategoryResponse {
+  id: string;
+}
+
+export interface GetCategoryResponse {
   id: string;
 }
 

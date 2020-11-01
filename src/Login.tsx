@@ -40,7 +40,7 @@ export function Login() {
       await new Backend().login(email, password);
       history.push("/dashboard");
     } catch (error) {
-      alert(error);
+      alert("Helytelen felhasználónév vagy jelszó");
     }
   };
 
