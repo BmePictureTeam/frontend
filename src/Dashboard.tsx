@@ -1,5 +1,5 @@
-import React, { useState, Component, ChangeEvent, FormEvent } from "react";
-import { Backend } from "./service/backend";
+import React, { useState, Component, ChangeEvent, FormEvent, useEffect } from "react";
+import { Backend, Category} from "./service/backend";
 import { useMemo } from "react";
 import {
   BrowserRouter as Router,
@@ -43,8 +43,18 @@ export function Dashboard() {
     return;
   }
 
-  
-  
+  const [kategoriak, setKategoriak] = useState([] as Category[]);
+
+  const updateKategoriak = async () => {
+    try {
+      const response = await new Backend().getCategories();
+      setKategoriak(response.categories);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(()=>{updateKategoriak();}, []);
 
   return (
     <div className="Dashboard">
@@ -69,6 +79,7 @@ export function Dashboard() {
       <br />
       <div id="KategoriaText">Kategória</div>
 
+
       <table id="tabla">
         <tr>
           <th>Név</th>
@@ -76,7 +87,7 @@ export function Dashboard() {
           <th></th>
         </tr>
         <tr className="paratlan">
-          <td>Tájképek</td>
+          <td>{kategoriak[0]?.name}</td>
           <td>12</td>
           <td></td>
         </tr>

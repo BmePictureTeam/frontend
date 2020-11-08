@@ -58,27 +58,6 @@ export class Backend {
 
 
 
-  public async getCategories(): Promise<GetCategoriesResponse> {
-    this.checkToken();
-
-    const response = await fetch(`${Backend.backendUrl}/categories`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${Backend.token}`,
-      },
-      body: JSON.stringify({}),
-    });
-
-    this.checkResponseStatus(response);
-
-    return await response.json();
-  }
-
-
-
-
-
 
 
 
@@ -94,7 +73,37 @@ export class Backend {
       throw new Error("token must be set");
     }
   }
+
+
+  public async getCategories(): Promise<GetCategoriesResponse> {
+    this.checkToken();
+
+    const response = await fetch(`${Backend.backendUrl}/categories`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${Backend.token}`,
+      }
+    });
+
+    this.checkResponseStatus(response);
+
+    return await response.json();
+  }
+
+
 }
+
+export interface Category {
+  id: string;
+  image_count: number;
+  name: string;
+}
+
+interface GetCategoriesResponse {
+  categories: Category[];
+}
+
 
 export interface LoginResponse {
   token: string;
@@ -106,15 +115,7 @@ export interface CreateCategoryResponse {
 
 
 
-interface Category {
-  id: string;
-  image_count: number;
-  name: string;
-}
 
-interface GetCategoriesResponse {
-  categories: Category[]
-}
 
 export class BackendError extends Error {
   constructor(public response: Response) {
