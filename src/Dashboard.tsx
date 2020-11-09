@@ -56,6 +56,49 @@ export function Dashboard() {
 
   useEffect(()=>{updateKategoriak();}, []);
 
+
+  const deleteKategoria = async (id:string) => {
+    try {
+      const response = await new Backend().deleteCategory(id);
+       await updateKategoriak ();
+      
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const atnevezKategoria = async (id:string,name:string) => {
+    try {
+      const response = await new Backend().renameCategory(id,name);
+       await updateKategoriak ();
+      
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
+  const [name, setName] = useState('')
+
+  const renObjData = kategoriak.map(
+     (kategoria) => {
+    return ( 
+      <tr className="paros">
+        <td>{kategoria.name}</td>
+        <td >{kategoria.image_count}</td>
+        <td className="gombcella">
+          <input className="renameInput" type="text" onChange={event => setName(event.target.value) }/>
+          <button className="atvevezesGombok" onClick={() => atnevezKategoria(kategoria.id,name)}>Átnevez</button>
+          <button className="torlesGombok" onClick={() => deleteKategoria(kategoria.id)}>Törlés</button>
+        </td>
+        </tr>
+        
+     );
+ }
+ 
+ 
+ );
+
   return (
     <div className="Dashboard">
       <div className="Fejlec">
@@ -81,31 +124,16 @@ export function Dashboard() {
 
 
       <table id="tabla">
+      <thead>
         <tr>
           <th>Név</th>
           <th>Képek darabszáma</th>
-          <th></th>
+          <th className="gombcella">Műveletek</th>
         </tr>
-        <tr className="paratlan">
-          <td>{kategoriak[0]?.name}</td>
-          <td>12</td>
-          <td></td>
-        </tr>
-        <tr className="paros">
-          <td>Portré</td>
-          <td>432</td>
-          <td></td>
-        </tr>
-        <tr className="paratlan">
-          <td>Sport</td>
-          <td>23</td>
-          <td></td>
-        </tr>
-        <tr className="paros">
-          <td>Naplemente</td>
-          <td>433</td>
-          <td></td>
-        </tr>
+      </thead>
+      <tbody>
+        {renObjData}
+      </tbody>
       </table>
     </div>
   );

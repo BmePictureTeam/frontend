@@ -56,6 +56,41 @@ export class Backend {
     return await response.json();
   }
 
+  public async renameCategory(id: string, name: string): Promise<void> {
+    this.checkToken();
+
+    const response = await fetch(`${Backend.backendUrl}/categories/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${Backend.token}`,
+      },
+      body: JSON.stringify({ name }),
+    });
+
+    this.checkResponseStatus(response);
+
+  }
+
+
+
+  public async deleteCategory(id: string): Promise<void> {
+    this.checkToken();
+
+    const response = await fetch(`${Backend.backendUrl}/categories/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${Backend.token}`,
+      },
+
+    });
+
+    this.checkResponseStatus(response);
+
+     
+  }
+
 
 
 
@@ -79,7 +114,7 @@ export class Backend {
     this.checkToken();
 
     const response = await fetch(`${Backend.backendUrl}/categories`, {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${Backend.token}`,
@@ -111,6 +146,10 @@ export interface LoginResponse {
 
 export interface CreateCategoryResponse {
   id: string;
+}
+
+export interface DeleteCategoryResponse {
+  message: string;
 }
 
 
