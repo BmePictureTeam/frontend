@@ -1,3 +1,12 @@
+interface UserInfo {
+  id: string;
+  admin: boolean;
+}
+
+interface TokenPayload {
+  user: UserInfo;
+}
+
 export class Backend {
   private static token: string | null = localStorage.getItem("token");
   private static backendUrl = process.env.REACT_APP_API_URL as string;
@@ -24,7 +33,9 @@ export class Backend {
     const loginRes = (await response.json()) as LoginResponse;
 
     Backend.token = loginRes.token;
+    console.log(Backend.token);
     localStorage.setItem("token", Backend.token);
+    localStorage.setItem("email", email);
   }
 
   public async registration(email: string, password: string) {
@@ -69,10 +80,7 @@ export class Backend {
     });
 
     this.checkResponseStatus(response);
-
   }
-
-
 
   public async deleteCategory(id: string): Promise<void> {
     this.checkToken();
@@ -83,19 +91,10 @@ export class Backend {
         "Content-Type": "application/json",
         Authorization: `Bearer ${Backend.token}`,
       },
-
     });
 
     this.checkResponseStatus(response);
-
-     
   }
-
-
-
-
-
-
 
   private checkResponseStatus(response: Response) {
     if (response.status >= 400) {
@@ -109,7 +108,6 @@ export class Backend {
     }
   }
 
-
   public async getCategories(): Promise<GetCategoriesResponse> {
     this.checkToken();
 
@@ -118,15 +116,13 @@ export class Backend {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${Backend.token}`,
-      }
+      },
     });
 
     this.checkResponseStatus(response);
 
     return await response.json();
   }
-
-
 }
 
 export interface Category {
@@ -139,7 +135,6 @@ interface GetCategoriesResponse {
   categories: Category[];
 }
 
-
 export interface LoginResponse {
   token: string;
 }
@@ -151,10 +146,6 @@ export interface CreateCategoryResponse {
 export interface DeleteCategoryResponse {
   message: string;
 }
-
-
-
-
 
 export class BackendError extends Error {
   constructor(public response: Response) {
