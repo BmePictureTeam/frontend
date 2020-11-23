@@ -31,6 +31,28 @@ export function Dashboard() {
   }
 
 
+  const onSearchChange = (event: any) => {
+    updatekeresettSzoveg(event.target.value);
+  };
+
+
+  const keresesClick = async () => {
+ 
+    if(keresettSzoveg===""){
+      updateKategoriak();
+      
+    }else{
+      
+      var kat = [];
+      for (const k of kategoriak) {
+        if(k.name.toLowerCase().includes(keresettSzoveg.toLowerCase())){
+          kat.push(k);
+        }
+      }
+      setKategoriak(kat);
+      return;
+    }
+  }
 
   const ujKategoriaClick = async () => {
     if (Backend.isLoggedIn()) {
@@ -80,6 +102,8 @@ export function Dashboard() {
 
   const [name, setName] = useState('')
 
+  const [keresettSzoveg, updatekeresettSzoveg] = useState('');
+
   const renObjData = kategoriak.map(
      (kategoria) => {
     return ( 
@@ -110,12 +134,19 @@ export function Dashboard() {
             
       
       </div>
-      <form className="KeresesForm">
-        <input className="KeresesBevitel" type="text" name="usrname" />
-        <button type="submit" id="KeresesGomb">
+  
+      <input
+          onChange={onSearchChange}
+          value={keresettSzoveg}
+          className="KeresesBevitel"
+          type="text"
+          name="usrname"
+        />
+
+        <button id="KeresesGomb" onClick={() => keresesClick()}>
           Keresés
         </button>
-      </form>
+      
       <button type="submit" id="UjKategoriaGomb" onClick={() => ujKategoriaClick()}>
         Új Kategória
       </button>
