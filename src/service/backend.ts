@@ -1,3 +1,5 @@
+import jwt from 'jsonwebtoken'
+
 interface UserInfo {
   id: string;
   admin: boolean;
@@ -31,11 +33,22 @@ export class Backend {
     this.checkResponseStatus(response);
 
     const loginRes = (await response.json()) as LoginResponse;
+   
 
-    Backend.token = loginRes.token;
-    console.log(Backend.token);
-    localStorage.setItem("token", Backend.token);
-    localStorage.setItem("email", email);
+    var decodedtoken = jwt.decode(loginRes.token, {complete: true, json: true});
+    var payload:TokenPayload = decodedtoken?.payload;
+    if(payload.user.admin){
+      Backend.token = loginRes.token;
+    
+      console.log(Backend.token);
+      localStorage.setItem("token", Backend.token);
+      localStorage.setItem("email", email);
+    }else{
+      alert("A webes felületen való belépéshez admin felhasználófiók szükséges.");
+    }
+    
+    
+
   }
 
   public async registration(email: string, password: string) {
