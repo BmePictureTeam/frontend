@@ -8,17 +8,18 @@ import React, {
 import { Backend, Category } from "./service/backend";
 import { useHistory, useLocation } from "react-router-dom";
 
-function kijelentkezesClick() {
-  Backend.setToken(null);
-  localStorage.removeItem("token");
-  localStorage.removeItem("email");
-}
-
 export function Dashboard() {
   var email: string | null = localStorage.getItem("email");
   const history = useHistory();
   if (!Backend.isLoggedIn()) {
     history.push("/login");
+  }
+
+  const kijelentkezesClick = () => {
+    Backend.setToken(null);
+    localStorage.removeItem("token");
+    localStorage.removeItem("email");
+    history.push("/");
   }
 
   const onSearchChange = (event: any) => {
