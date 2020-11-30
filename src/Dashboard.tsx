@@ -12,7 +12,6 @@ function kijelentkezesClick() {
   Backend.setToken(null);
   localStorage.removeItem("token");
   localStorage.removeItem("email");
-  window.location.reload(false);
 }
 
 export function Dashboard() {
@@ -47,7 +46,6 @@ export function Dashboard() {
     } else {
       history.push("/login");
     }
-    window.location.reload(false);
 
     return;
   };
