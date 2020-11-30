@@ -19,7 +19,7 @@ export function Dashboard() {
     Backend.setToken(null);
     localStorage.removeItem("token");
     localStorage.removeItem("email");
-    history.push("/");
+    history.push("/login");
   }
 
   const onSearchChange = (event: any) => {
