@@ -20,7 +20,6 @@ export function CategoryCreate() {
     }else{
       history.push("/login");
     }
-    window.location.reload(false);
     return;
   }
 
@@ -47,7 +46,6 @@ export function CategoryCreate() {
     try {
       await new Backend().createCategory(nev);
       history.push("/dashboard");
-      window.location.reload(false);
     } catch (error) {
       alert(error);
     }
